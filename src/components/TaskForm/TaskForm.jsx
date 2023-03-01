@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import css from './TaskForm.module.css';
-import { addToDo } from 'redux/todoSlice';
+import { addToDo } from 'redux/todo/todoSlice';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 
@@ -31,14 +31,14 @@ export const TaskForm = () => {
       status: null,
     };
     if (toDoTitle === '') {
-      document.querySelector('#toDoTitle').style.border = '1px solid #ff0000';
-      alert('This field is empty');
+      document.querySelector('#toDoTitle').classList.add('invalid');
+      document.querySelector('#titleLabel').classList.add('invalidLabel');
+
       return;
     }
     if (toDoDescription === '') {
-      document.querySelector('#toDoDescription').style.border =
-        '1px solid #ff0000';
-      alert('This field is empty');
+      document.querySelector('#toDoDescription').classList.add('invalid');
+      document.querySelector('#descriptionLabel').classList.add('invalidLabel');
       return;
     }
 
@@ -51,7 +51,7 @@ export const TaskForm = () => {
 
   return (
     <form className={css.contactForm} onSubmit={onSubmit}>
-      <label htmlFor="" className={css.formLabel}>
+      <label htmlFor="" className={css.formLabel} id="titleLabel">
         Title
         <input
           type="text"
@@ -62,7 +62,7 @@ export const TaskForm = () => {
           id="toDoTitle"
         />
       </label>
-      <label htmlFor="" className={css.formLabel}>
+      <label htmlFor="" className={css.formLabel} id="descriptionLabel">
         Description
         <input
           type="text"

@@ -17,3 +17,12 @@ code {
 .hidden {
   display: none;
 }
+
+.invalid {
+  border: 2px solid red;
+}
+.invalidLabel::after {
+  content: 'This field is empty';
+  font-size: 15px;
+  font-weight: 400;
+}

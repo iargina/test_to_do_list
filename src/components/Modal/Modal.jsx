@@ -1,17 +1,24 @@
 import css from './Modal.module.css';
-import ReactDOM from 'react-dom';
+import { getToDoToRender } from 'redux/todo/toDoSelectors';
+import { useSelector } from 'react-redux';
+import { deleteTodoToRender } from 'redux/todo/todoSlice';
+import { useDispatch } from 'react-redux';
 
-export const TaskModal = ({ id, title }) => {
-  const modalClose = () => {
-    document.getElementById('overlay').classList.add('hidden');
-  };
+export const TaskModal = () => {
+  const postToRender = useSelector(getToDoToRender);
+  const { id, title, description, status } = postToRender;
+  const dispatch = useDispatch();
 
-  return ReactDOM.createPortal(
-    <div id="overlay" className={css.overlay} onClick={modalClose}>
+  return (
+    <div className={css.overlay}>
       <div className={css.modal}>
-        <p>{id}</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <input type="checkbox" />
+        <button type="button" onClick={() => dispatch(deleteTodoToRender())}>
+          Close
+        </button>
       </div>
-    </div>,
-    document.getElementById('#modalRoot')
+    </div>
   );
 };
