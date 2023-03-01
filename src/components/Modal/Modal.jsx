@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 export const TaskModal = () => {
   const postToRender = useSelector(getToDoToRender);
-  const { id, title, description, status } = postToRender;
+  const { title, description } = postToRender;
   const dispatch = useDispatch();
 
   return (
