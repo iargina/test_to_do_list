@@ -2,17 +2,14 @@ import React from 'react';
 import css from './TaskList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getToDos } from 'redux/todo/toDoSelectors';
-import { openModal } from 'redux/modal/modal-slice';
-import { selectIsModalOpen } from 'redux/modal/modal-selectors';
+
 import { addTodoToRender } from 'redux/todo/todoSlice';
 
 export const TaskList = () => {
   const toDos = useSelector(getToDos);
   const dispatch = useDispatch();
-  let post = null;
-  const isModalOpen = useSelector(selectIsModalOpen);
 
-  const clickHandler = ev => {
+  const clickEvent = ev => {
     const postID = ev.currentTarget.firstElementChild.textContent;
     const post = toDos.find(el => el.id === postID);
     console.log(post);
@@ -22,7 +19,7 @@ export const TaskList = () => {
 
   document
     .querySelectorAll('tr')
-    .forEach(e => e.addEventListener('click', clickHandler));
+    .forEach(e => e.addEventListener('click', clickEvent));
 
   return (
     <table className={css.table}>
