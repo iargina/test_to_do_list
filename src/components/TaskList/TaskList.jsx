@@ -12,14 +12,9 @@ export const TaskList = () => {
   const clickEvent = ev => {
     const postID = ev.currentTarget.firstElementChild.textContent;
     const post = toDos.find(el => el.id === postID);
-    console.log(post);
     dispatch(addTodoToRender(post));
     return;
   };
-
-  document
-    .querySelectorAll('tr')
-    .forEach(e => e.addEventListener('click', clickEvent));
 
   return (
     <table className={css.table}>
@@ -32,7 +27,7 @@ export const TaskList = () => {
         </tr>
         {toDos.map(el => {
           return (
-            <tr key={el.id}>
+            <tr key={el.id} onClick={clickEvent}>
               <td>{el.id}</td>
               <td>{el.title}</td>
               <td>{el.description}</td>
